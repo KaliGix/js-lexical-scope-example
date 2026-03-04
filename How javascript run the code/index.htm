@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1</title>
+</head>
+<body>
+
+    <script type="text/javascript">
+
+        // =========================
+        // GLOBAL EXECUTION CONTEXT
+        // =========================
+
+        // In a browser environment, `this` in the global scope
+        // refers to the `window` object.
+        console.log(this);
+
+
+        // =========================
+        // FUNCTION EXECUTION CONTEXT
+        // =========================
+
+        // This function receives a parameter and returns a string.
+        // It does NOT modify any external state.
+        function changeName(name) {
+            return "Your new name is : " + name;
+        }
+
+        // The function is executed, but its return value is not stored
+        // or logged, so the result is effectively discarded.
+        changeName("kalibell");
+
+
+        // =========================
+        // LEXICAL SCOPE EXAMPLE
+        // =========================
+
+        // Global variable declaration.
+        // This variable belongs to the global lexical environment.
+        var number = 2;
+
+        // This function is defined in the global scope.
+        // Because of lexical scoping, it will always reference
+        // the global `number` variable.
+        function changeValue() { 
+            console.log("The new value is : " + number);
+        }
+
+        // This function creates its own local variable named `number`.
+        // This variable exists ONLY inside this function.
+        function printNumber() {
+            var number = 5;
+
+            // Even though `printNumber` has its own `number`,
+            // `changeValue` does NOT use it.
+            // It uses the `number` from the scope where it was defined
+            // (the global scope).
+            changeValue();
+        }
+
+        // Calling this function will print:
+        // "The new value is : 2"
+        // NOT 5, due to lexical scoping rules.
+        printNumber();
+
+    </script>
+    
+</body>
+</html>
